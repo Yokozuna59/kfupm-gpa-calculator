@@ -59,7 +59,7 @@ class Form extends React.Component {
       fields: [
         {
           grade: "",
-          hours: 0,
+          hours: null,
         },
       ],
     };
@@ -69,7 +69,6 @@ class Form extends React.Component {
 
   addField() {
     this.setState({
-      gpa: null,
       fields: [
         ...this.state.fields,
         {
@@ -110,7 +109,6 @@ class Form extends React.Component {
             />
           ))}
         </form>
-        <br></br>
         <button onClick={() => this.addField()}>Add</button>
         <h2>GPA: {gpa >= 0 ? gpa : ""}</h2>
       </div>
@@ -119,7 +117,7 @@ class Form extends React.Component {
 }
 
 function getGradePoints(letterGrade) {
-  const myDict = {
+  const letterGrades = {
     "A+": 4,
     A: 3.75,
     "B+": 3.5,
@@ -130,7 +128,7 @@ function getGradePoints(letterGrade) {
     D: 1,
     F: 0,
   };
-  return myDict[letterGrade.toUpperCase()];
+  return letterGrades[letterGrade.toUpperCase()];
 }
 
 function calculateGPA(arr) {
