@@ -25,14 +25,23 @@ class GradeField extends React.Component {
   render() {
     return (
       <fieldset>
-        <input
-          placeholder="Letter grade 'eg A+' "
+        <select
           name="grade"
           onChange={this.handleChange}
           data-key={this.props.dataKey}
-        ></input>
+        >
+          <option value="">Letter grade</option>
+          <option value="A+">A+</option>
+          <option value="A">A</option>
+          <option value="B+">B+</option>
+          <option value="B">B</option>
+          <option value="C+">C+</option>
+          <option value="C">C</option>
+          <option value="D+">D+</option>
+          <option value="D">D</option>
+          <option value="F">F</option>
+        </select>
         <input
-          placeholder="Hours"
           name="hours"
           onChange={this.handleChange}
           data-key={this.props.dataKey}
@@ -49,8 +58,8 @@ class Form extends React.Component {
     this.state = {
       fields: [
         {
-          grade: "A",
-          hours: 3,
+          grade: "",
+          hours: 0,
         },
       ],
     };
@@ -65,7 +74,7 @@ class Form extends React.Component {
         ...this.state.fields,
         {
           grade: "",
-          hours: 3,
+          hours: null,
         },
       ],
     });
@@ -73,7 +82,7 @@ class Form extends React.Component {
 
   handleChange(e) {
     const key = e.target.name;
-    const index = e.target.attributes[2].value;
+    const index = e.target.attributes[1].value;
 
     const fields = [...this.state.fields];
     const field = { ...fields[index] };
@@ -85,13 +94,9 @@ class Form extends React.Component {
     this.setState({ fields });
   }
 
-  handleClick() {
-    this.setState({
-      gpa: calculateGPA(this.state.fields),
-    });
-  }
-
   render() {
+    let gpa = calculateGPA(this.state.fields);
+
     return (
       <div>
         <form>
@@ -105,10 +110,9 @@ class Form extends React.Component {
             />
           ))}
         </form>
-        <button onClick={() => this.handleClick()}>Calculate</button>
         <br></br>
         <button onClick={() => this.addField()}>Add</button>
-        <h2>GPA: {this.state.gpa}</h2>
+        <h2>GPA: {gpa >= 0 ? gpa : ""}</h2>
       </div>
     );
   }
@@ -126,8 +130,7 @@ function getGradePoints(letterGrade) {
     D: 1,
     F: 0,
   };
-
-  return myDict[letterGrade];
+  return myDict[letterGrade.toUpperCase()];
 }
 
 function calculateGPA(arr) {
