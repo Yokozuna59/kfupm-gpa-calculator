@@ -1,10 +1,11 @@
 import React from "react";
+import "./index.css";
 
 class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <h1>GPA Calculator</h1>
+        <h1 className="text-center">GPA Calculator</h1>
         <Form></Form>
       </div>
     );
@@ -24,29 +25,37 @@ class GradeField extends React.Component {
 
   render() {
     return (
-      <fieldset>
-        <select
-          name="grade"
-          onChange={this.handleChange}
-          data-key={this.props.dataKey}
-        >
-          <option value="">Letter grade</option>
-          <option value="A+">A+</option>
-          <option value="A">A</option>
-          <option value="B+">B+</option>
-          <option value="B">B</option>
-          <option value="C+">C+</option>
-          <option value="C">C</option>
-          <option value="D+">D+</option>
-          <option value="D">D</option>
-          <option value="F">F</option>
-        </select>
-        <input
-          name="hours"
-          onChange={this.handleChange}
-          data-key={this.props.dataKey}
-        ></input>
-      </fieldset>
+      <div>
+        <fieldset className="field">
+          <label>Grade</label>
+          <select
+            name="grade"
+            onChange={this.handleChange}
+            data-key={this.props.dataKey}
+          >
+            <option value="">Letter grade</option>
+            <option value="A+">A+</option>
+            <option value="A">A</option>
+            <option value="B+">B+</option>
+            <option value="B">B</option>
+            <option value="C+">C+</option>
+            <option value="C">C</option>
+            <option value="D+">D+</option>
+            <option value="D">D</option>
+            <option value="F">F</option>
+          </select>
+        </fieldset>
+
+        <fieldset className="field">
+          <label>Credits</label>
+          <input
+            name="hours"
+            onChange={this.handleChange}
+            data-key={this.props.dataKey}
+            type="number"
+          ></input>
+        </fieldset>
+      </div>
     );
   }
 }
@@ -98,7 +107,8 @@ class Form extends React.Component {
 
     return (
       <div>
-        <form>
+        <h2>GPA: {gpa >= 0 ? gpa : ""}</h2>
+        <form className="">
           {this.state.fields.map((field, k) => (
             <GradeField
               grade={field.grade}
@@ -110,7 +120,6 @@ class Form extends React.Component {
           ))}
         </form>
         <button onClick={() => this.addField()}>Add</button>
-        <h2>GPA: {gpa >= 0 ? gpa : ""}</h2>
       </div>
     );
   }
