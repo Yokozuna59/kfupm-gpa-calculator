@@ -29,7 +29,7 @@ class GradeField extends React.Component {
   render() {
     const creditOptions = [];
     creditOptions[0] = <option key="0">---</option>;
-    
+
     for (let i = 1; i < 11; i++) {
       creditOptions.push(
         <option key={i} value={i}>
@@ -38,7 +38,7 @@ class GradeField extends React.Component {
       );
     }
     return (
-      <div className="flex one two-600">
+      <div className="flex">
         <fieldset className="field">
           <label>Grade</label>
           <select
@@ -92,10 +92,6 @@ class Calculator extends React.Component {
           grade: "",
           hours: null,
         },
-        {
-          grade: "",
-          hours: null,
-        },
       ],
     };
 
@@ -133,7 +129,6 @@ class Calculator extends React.Component {
 
     return (
       <div>
-        <h2>GPA: {gpa >= 0 ? gpa : ""}</h2>
         <form className="">
           {this.state.fields.map((field, k) => (
             <GradeField
@@ -146,6 +141,7 @@ class Calculator extends React.Component {
           ))}
         </form>
         <button onClick={() => this.addField()}>Add course</button>
+        <h2>GPA: {gpa >= 0 ? gpa : ""}</h2>
       </div>
     );
   }
