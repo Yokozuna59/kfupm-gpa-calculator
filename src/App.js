@@ -152,8 +152,11 @@ function calculateGPA(arr) {
   arr.forEach((i) => {
     const hours = parseInt(i.hours);
     const grade = i.grade;
-    totalHours += hours;
-    totalPoints += getGradePoints(grade) * hours;
+
+    if (hours && grade) {
+      totalHours += hours;
+      totalPoints += getGradePoints(grade) * hours;
+    }
   });
 
   return (totalPoints / totalHours).toFixed(3);
