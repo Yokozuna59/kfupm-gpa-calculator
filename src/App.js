@@ -27,6 +27,16 @@ class GradeField extends React.Component {
   }
 
   render() {
+    const creditOptions = [];
+    creditOptions[0] = <option key="0">---</option>;
+    
+    for (let i = 1; i < 11; i++) {
+      creditOptions.push(
+        <option key={i} value={i}>
+          {i}
+        </option>
+      );
+    }
     return (
       <div className="flex one two-600">
         <fieldset className="field">
@@ -51,14 +61,13 @@ class GradeField extends React.Component {
 
         <fieldset className="field">
           <label>Credits</label>
-          <input
+          <select
             name="hours"
             onChange={this.handleChange}
             data-key={this.props.dataKey}
-            type="number"
-            min="1"
-            max="10"
-          ></input>
+          >
+            {creditOptions}
+          </select>
         </fieldset>
       </div>
     );
@@ -71,6 +80,18 @@ class Calculator extends React.Component {
 
     this.state = {
       fields: [
+        {
+          grade: "",
+          hours: null,
+        },
+        {
+          grade: "",
+          hours: null,
+        },
+        {
+          grade: "",
+          hours: null,
+        },
         {
           grade: "",
           hours: null,
