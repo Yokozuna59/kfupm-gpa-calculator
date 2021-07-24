@@ -7,7 +7,7 @@ class App extends React.Component {
       <div className="App">
         <h1 className="text-center">GPA Calculator</h1>
         <div className="flex-wrapper">
-          <Form></Form>
+          <Calculator></Calculator>
           <Footer />
         </div>
       </div>
@@ -36,7 +36,7 @@ class GradeField extends React.Component {
             onChange={this.handleChange}
             data-key={this.props.dataKey}
           >
-            <option value="">Letter grade</option>
+            <option value="">---</option>
             <option value="A+">A+</option>
             <option value="A">A</option>
             <option value="B+">B+</option>
@@ -56,6 +56,8 @@ class GradeField extends React.Component {
             onChange={this.handleChange}
             data-key={this.props.dataKey}
             type="number"
+            min="1"
+            max="10"
           ></input>
         </fieldset>
       </div>
@@ -63,7 +65,7 @@ class GradeField extends React.Component {
   }
 }
 
-class Form extends React.Component {
+class Calculator extends React.Component {
   constructor(props) {
     super(props);
 
@@ -122,7 +124,7 @@ class Form extends React.Component {
             />
           ))}
         </form>
-        <button onClick={() => this.addField()}>Add</button>
+        <button onClick={() => this.addField()}>Add course</button>
       </div>
     );
   }
