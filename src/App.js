@@ -6,7 +6,10 @@ class App extends React.Component {
     return (
       <div className="App">
         <h1 className="text-center">GPA Calculator</h1>
-        <Form></Form>
+        <div className="flex-wrapper">
+          <Form></Form>
+          <Footer />
+        </div>
       </div>
     );
   }
@@ -25,7 +28,7 @@ class GradeField extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="flex one two-600">
         <fieldset className="field">
           <label>Grade</label>
           <select
@@ -152,6 +155,16 @@ function calculateGPA(arr) {
   });
 
   return (totalPoints / totalHours).toFixed(3);
+}
+
+function Footer(props) {
+  return (
+    <footer>
+      <p>
+        Made with React.js by <a href="https://github.com/mrbasel">Basel 🌟</a>
+      </p>
+    </footer>
+  );
 }
 
 export default App;
