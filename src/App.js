@@ -1,21 +1,25 @@
 import React from "react";
+import { ChakraProvider } from "@chakra-ui/react";
+import { Box, Flex } from "@chakra-ui/layout";
 
-import "./index.css";
+import Header from "./Header";
 import Calculator from "./Calculator";
 import Footer from "./Footer";
 
-class App extends React.Component {
-  render() {
-    return (
-      <div className="App">
-        <h1 className="text-center">GPA Calculator</h1>
-        <div className="flex-wrapper">
-          <Calculator></Calculator>
+function App({ Component }) {
+  return (
+    <ChakraProvider>
+      <Box className="App">
+        <Flex minH="100vh" flexDir="column" justifyContent="space-between">
+          <Box>
+            <Header />
+            <Calculator />
+          </Box>
           <Footer />
-        </div>
-      </div>
-    );
-  }
+        </Flex>
+      </Box>
+    </ChakraProvider>
+  );
 }
 
 export default App;

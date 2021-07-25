@@ -1,4 +1,6 @@
 import React from "react";
+import { Box, Text, Center, VStack } from "@chakra-ui/layout";
+import { Button } from "@chakra-ui/react";
 
 import GradeField from "./GradeField";
 
@@ -56,21 +58,30 @@ class Calculator extends React.Component {
     let gpa = calculateGPA(this.state.fields);
 
     return (
-      <div>
-        <form className="">
-          {this.state.fields.map((field, k) => (
-            <GradeField
-              grade={field.grade}
-              hours={field.hours}
-              key={k}
-              dataKey={k}
-              handleChange={this.handleChange}
-            />
-          ))}
-        </form>
-        <button onClick={() => this.addField()}>Add course</button>
-        <h2>GPA: {gpa >= 0 ? gpa : ""}</h2>
-      </div>
+      <Box my="6" maxW="960px" mx="auto">
+        {this.state.fields.map((field, k) => (
+          <GradeField
+            grade={field.grade}
+            hours={field.hours}
+            key={k}
+            dataKey={k}
+            handleChange={this.handleChange}
+          />
+        ))}
+        <Center>
+          <VStack>
+            <Box fontSize="3xl">
+              GPA:{" "}
+              <Text as="span" fontWeight="bold">
+                {gpa >= 0 ? gpa : ""}
+              </Text>
+            </Box>
+            <Button my="4" onClick={() => this.addField()}>
+              Add course
+            </Button>
+          </VStack>
+        </Center>
+      </Box>
     );
   }
 }

@@ -1,4 +1,5 @@
 import React from "react";
+import { Select, Flex, Input } from "@chakra-ui/react";
 
 class GradeField extends React.Component {
   constructor(props) {
@@ -13,7 +14,6 @@ class GradeField extends React.Component {
 
   render() {
     const creditOptions = [];
-    creditOptions[0] = <option key="0">---</option>;
 
     for (let i = 1; i < 11; i++) {
       creditOptions.push(
@@ -23,38 +23,44 @@ class GradeField extends React.Component {
       );
     }
     return (
-      <div className="flex">
-        <fieldset className="field">
-          <label>Grade</label>
-          <select
-            name="grade"
-            onChange={this.handleChange}
-            data-key={this.props.dataKey}
-          >
-            <option value="">---</option>
-            <option value="A+">A+</option>
-            <option value="A">A</option>
-            <option value="B+">B+</option>
-            <option value="B">B</option>
-            <option value="C+">C+</option>
-            <option value="C">C</option>
-            <option value="D+">D+</option>
-            <option value="D">D</option>
-            <option value="F">F</option>
-          </select>
-        </fieldset>
+      <Flex mx="4" my="4">
+        <Input placeholder="Course" width="30%" my="2" mx="2"></Input>
 
-        <fieldset className="field">
-          <label>Credits</label>
-          <select
-            name="hours"
-            onChange={this.handleChange}
-            data-key={this.props.dataKey}
-          >
-            {creditOptions}
-          </select>
-        </fieldset>
-      </div>
+        <Select
+          name="grade"
+          onChange={this.handleChange}
+          data-key={this.props.dataKey}
+          placeholder="Grade"
+          w="30%"
+          my="2"
+          mx="2"
+        >
+          <option value="A+">A+</option>
+          <option value="A">A</option>
+          <option value="B+">B+</option>
+          <option value="B">B</option>
+          <option value="C+">C+</option>
+          <option value="C">C</option>
+          <option value="D+">D+</option>
+          <option value="D">D</option>
+          <option value="F">F</option>
+        </Select>
+
+        <Select
+          name="hours"
+          onChange={this.handleChange}
+          data-key={this.props.dataKey}
+          placeholder="Credits"
+          w="30%"
+          my="2"
+        >
+          {creditOptions}
+        </Select>
+
+        {/* <Button  mx="2" my="2" px="3" size="sx" bgColor="tomato">
+          X
+        </Button> */}
+      </Flex>
     );
   }
 }
