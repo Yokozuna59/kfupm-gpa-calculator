@@ -4,7 +4,7 @@ import { Button } from "@chakra-ui/react";
 import { nanoid } from "nanoid";
 
 import GradeField from "./GradeField";
-import { calculateGPA } from "./utils";
+import { calculateGPA, calculateTotalHours } from "./utils";
 
 class Calculator extends React.Component {
   constructor(props) {
@@ -64,7 +64,8 @@ class Calculator extends React.Component {
   }
 
   render() {
-    let gpa = calculateGPA(this.state.fields);
+    const gpa = calculateGPA(this.state.fields);
+    const totalHours = calculateTotalHours(this.state.fields);
 
     return (
       <Box my="6" maxW="960px" mx="auto">
@@ -78,15 +79,16 @@ class Calculator extends React.Component {
             deleteField={this.deleteField}
           />
         ))}
-        <Center>
+        <Center textAlign="center">
           <VStack>
             <Box fontSize="3xl">
-              GPA:{" "}
+              GPA:
               <Text as="span" fontWeight="bold">
-                {gpa >= 0 ? gpa : ""}
+                {gpa >= 0 ? " " + gpa : ""}
               </Text>
             </Box>
-            <Button my="4" onClick={() => this.addField()}>
+            <Text fontSize="20">Total hours: {totalHours}</Text>
+            <Button mt="6" onClick={() => this.addField()}>
               Add course
             </Button>
           </VStack>

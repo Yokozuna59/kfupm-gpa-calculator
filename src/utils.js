@@ -13,6 +13,14 @@ function getGradePoints(letterGrade) {
   return letterGrades[letterGrade.toUpperCase()];
 }
 
+function calculateTotalHours(arr) {
+  let totalHours = 0;
+  arr.forEach((elem) => {
+    if (elem.hours) totalHours += parseInt(elem.hours);
+  });
+  return totalHours;
+}
+
 function calculateGPA(arr) {
   let totalHours = 0;
   let totalPoints = 0;
@@ -31,3 +39,4 @@ function calculateGPA(arr) {
 }
 
 exports.calculateGPA = calculateGPA;
+exports.calculateTotalHours = calculateTotalHours;
