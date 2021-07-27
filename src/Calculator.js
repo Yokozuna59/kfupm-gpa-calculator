@@ -4,20 +4,23 @@ import { Button } from "@chakra-ui/react";
 import { nanoid } from "nanoid";
 
 import GradeField from "./GradeField";
+import { calculateGPA } from "./utils";
 
 class Calculator extends React.Component {
   constructor(props) {
     super(props);
 
-    const fields = [...Array(3)].map((i) => {
-      return { grade: "", hours: null, id: nanoid(4) };
-    });
+    const fields = [...Array(3)].map((i) => ({
+      grade: "",
+      hours: null,
+      id: nanoid(4),
+    }));
 
     this.state = {
       fields: fields,
     };
 
-    this.handleChange = this.handleChange.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
     this.deleteField = this.deleteField.bind(this);
   }
 
@@ -43,7 +46,7 @@ class Calculator extends React.Component {
     this.setState({ fields: filteredArray });
   }
 
-  handleChange(e, id) {
+  handleInputChange(e, id) {
     let index;
     this.state.fields.forEach((field, i) => {
       if (id === field.id) index = i;
@@ -71,7 +74,7 @@ class Calculator extends React.Component {
             hours={field.hours}
             key={field.id}
             id={field.id}
-            handleChange={this.handleChange}
+            handleInputChange={this.handleInputChange}
             deleteField={this.deleteField}
           />
         ))}
@@ -91,38 +94,6 @@ class Calculator extends React.Component {
       </Box>
     );
   }
-}
-
-function getGradePoints(letterGrade) {
-  const letterGrades = {
-    "A+": 4,
-    A: 3.75,
-    "B+": 3.5,
-    B: 3,
-    "C+": 2.5,
-    C: 2,
-    "D+": 1.5,
-    D: 1,
-    F: 0,
-  };
-  return letterGrades[letterGrade.toUpperCase()];
-}
-
-function calculateGPA(arr) {
-  let totalHours = 0;
-  let totalPoints = 0;
-
-  arr.forEach((i) => {
-    const hours = parseInt(i.hours);
-    const grade = i.grade;
-
-    if (hours && grade) {
-      totalHours += hours;
-      totalPoints += getGradePoints(grade) * hours;
-    }
-  });
-
-  return (totalPoints / totalHours).toFixed(3);
 }
 
 export default Calculator;

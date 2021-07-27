@@ -5,12 +5,12 @@ class GradeField extends React.Component {
   constructor(props) {
     super(props);
 
-    this.handleChange = this.handleChange.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
     this.handleClickDelete = this.handleClickDelete.bind(this);
   }
 
-  handleChange(e) {
-    this.props.handleChange(e, this.props.id);
+  handleInputChange(e) {
+    this.props.handleInputChange(e, this.props.id);
   }
 
   handleClickDelete() {
@@ -33,7 +33,7 @@ class GradeField extends React.Component {
 
         <Select
           name="grade"
-          onChange={this.handleChange}
+          onChange={this.handleInputChange}
           placeholder="Grade"
           w="30%"
           my="2"
@@ -52,7 +52,7 @@ class GradeField extends React.Component {
 
         <Select
           name="hours"
-          onChange={this.handleChange}
+          onChange={this.handleInputChange}
           placeholder="Credits"
           w="30%"
           my="2"
@@ -66,6 +66,7 @@ class GradeField extends React.Component {
           px="3"
           size="sx"
           bgColor="tomato"
+          color="white"
           onClick={this.handleClickDelete}
         >
           X
