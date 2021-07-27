@@ -1,15 +1,20 @@
 import React from "react";
-import { Select, Flex, Input } from "@chakra-ui/react";
+import { Select, Flex, Input, Button } from "@chakra-ui/react";
 
 class GradeField extends React.Component {
   constructor(props) {
     super(props);
 
     this.handleChange = this.handleChange.bind(this);
+    this.handleClickDelete = this.handleClickDelete.bind(this);
   }
 
   handleChange(e) {
-    this.props.handleChange(e);
+    this.props.handleChange(e, this.props.id);
+  }
+
+  handleClickDelete() {
+    this.props.deleteField(this.props.id);
   }
 
   render() {
@@ -29,7 +34,6 @@ class GradeField extends React.Component {
         <Select
           name="grade"
           onChange={this.handleChange}
-          data-key={this.props.dataKey}
           placeholder="Grade"
           w="30%"
           my="2"
@@ -49,7 +53,6 @@ class GradeField extends React.Component {
         <Select
           name="hours"
           onChange={this.handleChange}
-          data-key={this.props.dataKey}
           placeholder="Credits"
           w="30%"
           my="2"
@@ -57,9 +60,16 @@ class GradeField extends React.Component {
           {creditOptions}
         </Select>
 
-        {/* <Button  mx="2" my="2" px="3" size="sx" bgColor="tomato">
+        <Button
+          mx="2"
+          my="2"
+          px="3"
+          size="sx"
+          bgColor="tomato"
+          onClick={this.handleClickDelete}
+        >
           X
-        </Button> */}
+        </Button>
       </Flex>
     );
   }

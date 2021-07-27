@@ -1,6 +1,7 @@
 import React from "react";
 import { Box, Text, Center, VStack } from "@chakra-ui/layout";
 import { Button } from "@chakra-ui/react";
+import { nanoid } from "nanoid";
 
 import GradeField from "./GradeField";
 
@@ -8,24 +9,16 @@ class Calculator extends React.Component {
   constructor(props) {
     super(props);
 
+    const fields = [...Array(3)].map((i) => {
+      return { grade: "", hours: null, id: nanoid(4) };
+    });
+
     this.state = {
-      fields: [
-        {
-          grade: "",
-          hours: null,
-        },
-        {
-          grade: "",
-          hours: null,
-        },
-        {
-          grade: "",
-          hours: null,
-        },
-      ],
+      fields: fields,
     };
 
     this.handleChange = this.handleChange.bind(this);
+    this.deleteField = this.deleteField.bind(this);
   }
 
   addField() {
@@ -35,15 +28,28 @@ class Calculator extends React.Component {
         {
           grade: "",
           hours: null,
+          id: nanoid(4),
         },
       ],
     });
   }
 
-  handleChange(e) {
-    const key = e.target.name;
-    const index = e.target.attributes[1].value;
+  deleteField(id) {
+    if (this.state.fields.length === 1) {
+      return;
+    }
 
+    const filteredArray = this.state.fields.filter((elem) => elem.id !== id);
+    this.setState({ fields: filteredArray });
+  }
+
+  handleChange(e, id) {
+    let index;
+    this.state.fields.forEach((field, i) => {
+      if (id === field.id) index = i;
+    });
+
+    const key = e.target.name;
     const fields = [...this.state.fields];
     const field = { ...fields[index] };
 
@@ -51,7 +57,7 @@ class Calculator extends React.Component {
 
     fields[index] = field;
 
-    this.setState({ fields });
+    this.setState({ fields: fields });
   }
 
   render() {
@@ -59,13 +65,14 @@ class Calculator extends React.Component {
 
     return (
       <Box my="6" maxW="960px" mx="auto">
-        {this.state.fields.map((field, k) => (
+        {this.state.fields.map((field) => (
           <GradeField
             grade={field.grade}
             hours={field.hours}
-            key={k}
-            dataKey={k}
+            key={field.id}
+            id={field.id}
             handleChange={this.handleChange}
+            deleteField={this.deleteField}
           />
         ))}
         <Center>
