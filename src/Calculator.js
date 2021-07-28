@@ -22,6 +22,7 @@ class Calculator extends React.Component {
 
     this.handleInputChange = this.handleInputChange.bind(this);
     this.deleteField = this.deleteField.bind(this);
+    this.handleDeleteTerm = this.handleDeleteTerm.bind(this);
   }
 
   addField() {
@@ -44,6 +45,10 @@ class Calculator extends React.Component {
 
     const filteredArray = this.state.fields.filter((elem) => elem.id !== id);
     this.setState({ fields: filteredArray });
+  }
+
+  handleDeleteTerm() {
+    this.props.deleteTerm(this.props.id);
   }
 
   handleInputChange(e, id) {
@@ -85,7 +90,7 @@ class Calculator extends React.Component {
         <Center textAlign="center">
           <VStack>
             <Box fontSize="3xl">
-              GPA:
+              Term GPA:
               <Text as="span" fontWeight="bold">
                 {gpa >= 0 ? " " + gpa : ""}
               </Text>
@@ -94,7 +99,9 @@ class Calculator extends React.Component {
             <Button mt="6" onClick={() => this.addField()}>
               Add course
             </Button>
-            <Button bgColor="tomato">Delete Term</Button>
+            <Button bgColor="tomato" onClick={() => this.handleDeleteTerm()}>
+              Delete Term
+            </Button>
           </VStack>
         </Center>
       </Box>
