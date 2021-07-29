@@ -34,6 +34,48 @@ class CalcContainer extends React.Component {
     this.setState({ terms: filteredArray });
   }
 
+  addCourse(id) {
+    let arrCopy = this.state.terms.slice();
+
+    let index = 0;
+    for (let i = 0; i < this.state.terms.length; i++) {
+      const term = this.state.terms[i];
+      if (term.id === id) {
+        index = i;
+        break;
+      }
+    }
+    arrCopy[index].fields.push({ grade: "", hours: null, id: nanoid(4) });
+    console.log(arrCopy);
+    this.setState({
+      terms: arrCopy,
+    });
+  }
+
+  deleteCourse(termId, courseId) {
+    let arrCopy = this.state.terms.slice();
+
+    let index = 0;
+    for (let i = 0; i < this.state.terms.length; i++) {
+      const term = this.state.terms[i];
+      if (term.id === termId) {
+        index = i;
+        break;
+      }
+    }
+
+    if (arrCopy[index].fields.length === 1) return;
+
+    arrCopy[index].fields = arrCopy[index].fields.filter((elem) => elem.id !== courseId);
+    console.log(arrCopy);
+
+    this.setState({
+      terms: arrCopy,
+    });
+  }
+
+  handleInputChange() {}
+
   render() {
     return (
       <Box my="6" maxW="960px" mx="auto">
@@ -42,7 +84,10 @@ class CalcContainer extends React.Component {
             title={"Term " + (index + 1)}
             key={e.id}
             id={e.id}
+            fields={e.fields}
             deleteTerm={this.deleteTerm}
+            handleAddCourse={(id) => this.addCourse(id)}
+            handleDeleteCourse={(courseId) => this.deleteCourse(e.id, courseId)}
           />
         ))}
         <VStack>
