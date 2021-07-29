@@ -67,7 +67,7 @@ class Calculator extends React.Component {
                 {gpa >= 0 ? " " + gpa : ""}
               </Text>
             </Box>
-            <Text fontSize="20">Total hours: {totalHours}</Text>
+            <Text fontSize="20">Term hours: {totalHours}</Text>
             <HStack>
               <Button onClick={() => this.props.handleAddCourse(this.props.id)}>
                 Add course

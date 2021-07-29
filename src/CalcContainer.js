@@ -5,7 +5,7 @@ import Calculator from "./Calculator";
 import { nanoid } from "nanoid";
 import { Button } from "@chakra-ui/react";
 
-import { getTermIndex } from "./utils";
+import { calculateGPA, calculateTotalHours, getTermIndex } from "./utils";
 
 class CalcContainer extends React.Component {
   constructor(props) {
@@ -77,6 +77,16 @@ class CalcContainer extends React.Component {
   }
 
   render() {
+    const allFields = [];
+    for (const term of this.state.terms) {
+      for (const field of term.fields) {
+        allFields.push(field);
+      }
+    }
+
+    const cumGPA = calculateGPA(allFields);
+    const totalHours = calculateTotalHours(allFields);
+
     return (
       <Box my="6" maxW="960px" mx="auto">
         {this.state.terms.map((term, index) => (
@@ -97,8 +107,9 @@ class CalcContainer extends React.Component {
         ))}
         <VStack>
           <Text fontSize="25" textAlign="center">
-            Cumulative GPA:{" "}
+            Cumulative GPA: {cumGPA >= 0 ? " " + cumGPA : ""}
           </Text>
+          <Text fontSize="20">Total hours: {totalHours}</Text>
           <Button onClick={() => this.addTerm()}>Add term</Button>
         </VStack>
       </Box>
