@@ -1,7 +1,6 @@
 import React from "react";
 import { Box, Text, Center, VStack } from "@chakra-ui/layout";
 import { Button, Heading, HStack } from "@chakra-ui/react";
-import { nanoid } from "nanoid";
 
 import GradeField from "./GradeField";
 import { calculateGPA, calculateTotalHours } from "./utils";
@@ -11,7 +10,6 @@ class Calculator extends React.Component {
     super(props);
 
     this.handleInputChange = this.handleInputChange.bind(this);
-    // this.deleteField = this.deleteField.bind(this);
     this.handleDeleteTerm = this.handleDeleteTerm.bind(this);
   }
 
@@ -23,21 +21,23 @@ class Calculator extends React.Component {
     this.props.deleteTerm(this.props.id);
   }
 
-  handleInputChange(e, id) {
-    let index;
-    this.props.fields.forEach((field, i) => {
-      if (id === field.id) index = i;
-    });
+  handleInputChange(event, id) {
+    let fieldIndex;
 
-    const key = e.target.name;
-    const fields = [...this.props.fields];
-    const field = { ...fields[index] };
+    for (let i = 0; i < this.props.fields.length; i++) {
+      const field = this.props.fields[i];
+      if (id === field.id) {
+        fieldIndex = i;
+        break;
+      }
+    }
 
-    field[key] = e.target.value;
+    const key = event.target.name;
+    const field = { ...this.props.fields[fieldIndex] };
 
-    fields[index] = field;
+    field[key] = event.target.value;
 
-    this.setState({ fields: fields });
+    this.props.handleInputChange(id, field);
   }
 
   render() {
@@ -64,10 +64,10 @@ class Calculator extends React.Component {
             <Box fontSize="3xl">
               Term GPA:
               <Text as="span" fontWeight="bold">
-                {/* {gpa >= 0 ? " " + gpa : ""} */}
+                {gpa >= 0 ? " " + gpa : ""}
               </Text>
             </Box>
-            {/* <Text fontSize="20">Total hours: {totalHours}</Text> */}
+            <Text fontSize="20">Total hours: {totalHours}</Text>
             <HStack>
               <Button onClick={() => this.props.handleAddCourse(this.props.id)}>
                 Add course
