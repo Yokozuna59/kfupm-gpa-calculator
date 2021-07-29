@@ -3,7 +3,7 @@ import { Box, Text, Center, VStack } from "@chakra-ui/layout";
 import { Button, Heading, HStack } from "@chakra-ui/react";
 
 import GradeField from "./GradeField";
-import { calculateGPA, calculateTotalHours } from "./utils";
+import { calculateGPA, calculateTotalHours } from "../utils";
 
 class Calculator extends React.Component {
   constructor(props) {

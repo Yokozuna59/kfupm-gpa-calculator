@@ -3,9 +3,9 @@ import { ChakraProvider } from "@chakra-ui/react";
 import { Box, Flex } from "@chakra-ui/layout";
 
 import theme from "./theme";
-import Header from "./Header";
-import CalcContainer from "./CalcContainer";
-import Footer from "./Footer";
+import Header from "./components/Header";
+import CalcContainer from "./components/CalcContainer";
+import Footer from "./components/Footer";
 
 function App({ Component }) {
   return (

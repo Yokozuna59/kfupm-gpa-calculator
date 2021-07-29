@@ -5,7 +5,7 @@ import Calculator from "./Calculator";
 import { nanoid } from "nanoid";
 import { Button } from "@chakra-ui/react";
 
-import { calculateGPA, calculateTotalHours, getTermIndex } from "./utils";
+import { calculateGPA, calculateTotalHours, getTermIndex } from "../utils";
 
 class CalcContainer extends React.Component {
   constructor(props) {
