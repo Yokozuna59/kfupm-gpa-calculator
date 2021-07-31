@@ -1,10 +1,12 @@
 import React from "react";
 
 import { Box, Text, VStack } from "@chakra-ui/layout";
-import Calculator from "./Calculator";
+
 import { nanoid } from "nanoid";
 import { Button } from "@chakra-ui/react";
 
+import Calculator from "./Calculator";
+import CurrentGradesField from "./CurrentGradesField";
 import { calculateGPA, calculateTotalHours, getTermIndex } from "../utils";
 
 class CalcContainer extends React.Component {
@@ -12,6 +14,7 @@ class CalcContainer extends React.Component {
     super(props);
 
     this.state = {
+      currentGrades: { gpa: null, hours: null },
       terms: [
         { id: nanoid(4), fields: [{ grade: "", hours: null, id: nanoid(4) }] },
       ],
@@ -76,6 +79,18 @@ class CalcContainer extends React.Component {
     });
   }
 
+  handleCurrentGpaChange(gpa) {
+    this.setState({
+      currentGrades: { gpa: gpa, hours: this.state.currentGrades.hours },
+    });
+  }
+
+  handleCurrentHoursChange(hours) {
+    this.setState({
+      currentGrades: { gpa: this.state.currentGrades.gpa, hours: hours },
+    });
+  }
+
   render() {
     const allFields = [];
     for (const term of this.state.terms) {
@@ -84,11 +99,26 @@ class CalcContainer extends React.Component {
       }
     }
 
-    const cumGPA = calculateGPA(allFields);
-    const totalHours = calculateTotalHours(allFields);
+    let cumGPA = calculateGPA(allFields);
+    let totalHours = calculateTotalHours(allFields);
+
+    if (this.state.currentGrades.hours && this.state.currentGrades.gpa) {
+      cumGPA = (
+        (cumGPA * totalHours +
+          parseFloat(this.state.currentGrades.gpa) *
+            parseInt(this.state.currentGrades.hours)) /
+        (totalHours + parseInt(this.state.currentGrades.hours))
+      ).toFixed(2);
+
+      totalHours += parseInt(this.state.currentGrades.hours);
+    }
 
     return (
       <Box my="6" maxW="960px" mx="auto">
+        <CurrentGradesField
+          handleCurrentGpaChange={(e) => this.handleCurrentGpaChange(e)}
+          handleCurrentHoursChange={(e) => this.handleCurrentHoursChange(e)}
+        />
         {this.state.terms.map((term, index) => (
           <Calculator
             title={"Term " + (index + 1)}
@@ -105,7 +135,7 @@ class CalcContainer extends React.Component {
             }
           />
         ))}
-        <VStack>
+        <VStack shouldWrapChildren="true">
           <Text fontSize="25" textAlign="center">
             Cumulative GPA: {cumGPA >= 0 ? " " + cumGPA : ""}
           </Text>
