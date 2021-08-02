@@ -70,7 +70,7 @@ class Calculator extends React.Component {
             <Text fontSize="20">Term hours: {totalHours}</Text>
             <HStack>
               <Button onClick={() => this.props.handleAddCourse(this.props.id)}>
-                Add course
+                Add Course
               </Button>
               <Button bgColor="tomato" onClick={() => this.handleDeleteTerm()}>
                 Delete Term

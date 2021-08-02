@@ -14,7 +14,7 @@ function CurrentGradesField(props) {
     <Flex justifyContent="center" wrap="wrap" my="2" textAlign="center">
       <Box m="1">
         <Text mb="2" fontSize="16">
-          Current GPA:
+          Current GPA (Optional):
         </Text>
         <NumberInput
           min={0}
@@ -31,7 +31,7 @@ function CurrentGradesField(props) {
         </NumberInput>
       </Box>
       <Box m="1">
-        <Text mb="2">Hours completed:</Text>
+        <Text mb="2">Hours completed: (Optional)</Text>
         <NumberInput
           min={1}
           max={150}

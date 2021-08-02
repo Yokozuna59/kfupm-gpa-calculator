@@ -16,7 +16,14 @@ class CalcContainer extends React.Component {
     this.state = {
       currentGrades: { gpa: null, hours: null },
       terms: [
-        { id: nanoid(4), fields: [{ grade: "", hours: null, id: nanoid(4) }] },
+        {
+          id: nanoid(4),
+          fields: [
+            { grade: "", hours: null, id: nanoid(4) },
+            { grade: "", hours: null, id: nanoid(4) },
+            { grade: "", hours: null, id: nanoid(4) },
+          ],
+        },
       ],
     };
 
@@ -135,12 +142,12 @@ class CalcContainer extends React.Component {
             }
           />
         ))}
-        <VStack shouldWrapChildren="true">
+        <VStack shouldWrapChildren="true" border="1px solid #333" py="3">
           <Text fontSize="25" textAlign="center">
             Cumulative GPA: {cumGPA >= 0 ? " " + cumGPA : ""}
           </Text>
           <Text fontSize="20">Total hours: {totalHours}</Text>
-          <Button onClick={() => this.addTerm()}>Add term</Button>
+          <Button onClick={() => this.addTerm()}>Add Term</Button>
         </VStack>
       </Box>
     );
