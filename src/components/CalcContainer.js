@@ -115,7 +115,7 @@ class CalcContainer extends React.Component {
           parseFloat(this.state.currentGrades.gpa) *
             parseInt(this.state.currentGrades.hours)) /
         (totalHours + parseInt(this.state.currentGrades.hours))
-      ).toFixed(2);
+      ).toFixed(3);
 
       totalHours += parseInt(this.state.currentGrades.hours);
     }
