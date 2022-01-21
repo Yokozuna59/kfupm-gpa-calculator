@@ -16,7 +16,7 @@ export function Term({
 }) {
   const { gpa, totalHours } = useTermData(courses);
 
-  // This really needs refactoring
+  // TODO: This really needs refactoring
   const handleInputChange = (event, id) => {
     let fieldIndex;
 

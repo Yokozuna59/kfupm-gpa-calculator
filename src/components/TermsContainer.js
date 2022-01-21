@@ -28,6 +28,7 @@ export function TermsContainer() {
         onHoursChange={(e) => setCurrentHours(e.target.value)}
       /> */}
       {terms.map((term, index) => (
+        // TODO: Use context to avoid prop drilling
         <Term
           title={"Term " + (index + 1)}
           key={term.id}
