@@ -1,7 +1,7 @@
 import { nanoid } from "nanoid";
 import { useState } from "react";
-import { calculateGPA, calculateTotalHours } from "../utils";
 
+// TODO: This should be split into two hooks
 export function useTerms() {
   const [terms, setTerms] = useState([
     {
@@ -9,6 +9,7 @@ export function useTerms() {
       courses: [{ grade: "", hours: null, id: nanoid(4) }],
     },
   ]);
+  const allCourses = terms.map((term) => term.courses).flat();
 
   const addTerm = () => {
     setTerms([
@@ -72,20 +73,11 @@ export function useTerms() {
 
   return {
     terms,
+    allCourses,
     addTerm,
     deleteTerm,
     addCourse,
     deleteCourse,
     handleCourseChange,
-  };
-}
-
-export function useTermData(courses) {
-  const gpa = calculateGPA(courses);
-  const totalHours = calculateTotalHours(courses);
-
-  return {
-    gpa,
-    totalHours,
   };
 }

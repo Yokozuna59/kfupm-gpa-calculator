@@ -38,19 +38,7 @@ function calculateGPA(arr) {
   return (totalPoints / totalHours).toFixed(3);
 }
 
-function getTermIndex(terms, targetId) {
-  let found = false;
-  let index = 0;
-  while (!found) {
-    if (terms[index].id === targetId) found = true;
-    else index++;
-  }
-
-  return index;
-}
-
 module.exports = {
   calculateGPA,
   calculateTotalHours,
-  getTermIndex,
 };

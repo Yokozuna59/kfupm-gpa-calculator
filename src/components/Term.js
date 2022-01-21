@@ -3,7 +3,7 @@ import { Box, Text, Center, VStack } from "@chakra-ui/layout";
 import { Button, Heading, HStack } from "@chakra-ui/react";
 
 import { Course } from "./Course";
-import { useTermData } from "../hooks/useTerms";
+import { useGpa } from "../hooks/useGpa";
 
 export function Term({
   id,
@@ -14,7 +14,7 @@ export function Term({
   onAddCourse,
   onDeleteCourse,
 }) {
-  const { gpa, totalHours } = useTermData(courses);
+  const { gpa, totalHours } = useGpa(courses);
 
   // TODO: This really needs refactoring
   const handleInputChange = (event, id) => {
