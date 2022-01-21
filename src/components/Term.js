@@ -2,7 +2,7 @@ import React from "react";
 import { Box, Text, Center, VStack } from "@chakra-ui/layout";
 import { Button, Heading, HStack } from "@chakra-ui/react";
 
-import Course from "./Course";
+import { Course } from "./Course";
 import { useTermData } from "../hooks/useTerms";
 
 export function Term({
@@ -47,7 +47,7 @@ export function Term({
           key={field.id}
           id={field.id}
           handleInputChange={handleInputChange}
-          deleteCourse={(courseId) => onDeleteCourse(id, courseId)}
+          onDeleteCourse={(courseId) => onDeleteCourse(id, courseId)}
         />
       ))}
       <Center textAlign="center">

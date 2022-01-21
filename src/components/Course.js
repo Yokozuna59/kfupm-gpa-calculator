@@ -1,77 +1,52 @@
 import React from "react";
 import { Select, Flex, Input, Button } from "@chakra-ui/react";
 
-export default class Course extends React.Component {
-  constructor(props) {
-    super(props);
+const letterGrades = ["A+", "A", "B+", "B", "C+", "C", "D+", "D", "F"];
 
-    this.handleInputChange = this.handleInputChange.bind(this);
-    this.handleClickDelete = this.handleClickDelete.bind(this);
-  }
+export function Course({ id, handleInputChange, onDeleteCourse }) {
+  return (
+    <Flex mx="4" my="4">
+      <Input placeholder="Course" width="30%" my="2" mx="2"></Input>
+      <Select
+        name="grade"
+        onChange={handleInputChange}
+        placeholder="Grade"
+        w="30%"
+        my="2"
+        mx="2"
+      >
+        {letterGrades.map((grade) => (
+          <option key={grade} value={grade}>
+            {grade}
+          </option>
+        ))}
+      </Select>
 
-  handleInputChange(e) {
-    this.props.handleInputChange(e, this.props.id);
-  }
+      <Select
+        name="hours"
+        onChange={handleInputChange}
+        placeholder="Credits"
+        w="30%"
+        my="2"
+      >
+        {[...Array(10).keys()].map((i) => (
+          <option key={i} value={i}>
+            {i}
+          </option>
+        ))}
+      </Select>
 
-  handleClickDelete() {
-    this.props.deleteField(this.props.id);
-  }
-
-  render() {
-    const creditOptions = [];
-
-    for (let i = 1; i < 11; i++) {
-      creditOptions.push(
-        <option key={i} value={i}>
-          {i}
-        </option>
-      );
-    }
-    return (
-      <Flex mx="4" my="4">
-        <Input placeholder="Course" width="30%" my="2" mx="2"></Input>
-
-        <Select
-          name="grade"
-          onChange={this.handleInputChange}
-          placeholder="Grade"
-          w="30%"
-          my="2"
-          mx="2"
-        >
-          <option value="A+">A+</option>
-          <option value="A">A</option>
-          <option value="B+">B+</option>
-          <option value="B">B</option>
-          <option value="C+">C+</option>
-          <option value="C">C</option>
-          <option value="D+">D+</option>
-          <option value="D">D</option>
-          <option value="F">F</option>
-        </Select>
-
-        <Select
-          name="hours"
-          onChange={this.handleInputChange}
-          placeholder="Credits"
-          w="30%"
-          my="2"
-        >
-          {creditOptions}
-        </Select>
-
-        <Button
-          mx="2"
-          my="2"
-          px="3"
-          size="sx"
-          bgColor="tomato"
-          color="white"
-          onClick={() => this.props.deleteCourse(this.props.id)}
-        >
-          X
-        </Button>
-      </Flex>
-    );
-  }
+      <Button
+        mx="2"
+        my="2"
+        px="3"
+        size="sx"
+        bgColor="tomato"
+        color="white"
+        onClick={() => onDeleteCourse(id)}
+      >
+        X
+      </Button>
+    </Flex>
+  );
 }
