@@ -21,7 +21,7 @@ function CurrentGradesField(props) {
           max={4}
           step={0.1}
           name="gpa"
-          onChange={(e) => props.handleCurrentGpaChange(e)}
+          onChange={(e) => props.onGpaChange(e)}
         >
           <NumberInputField />
           <NumberInputStepper>
@@ -37,7 +37,7 @@ function CurrentGradesField(props) {
           max={150}
           name="hours"
           placeholder="Hours completed"
-          onChange={(e) => props.handleCurrentHoursChange(e)}
+          onChange={(e) => props.onHoursChange(e)}
         >
           <NumberInputField />
           <NumberInputStepper>
