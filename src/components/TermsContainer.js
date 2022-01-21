@@ -5,13 +5,13 @@ import { Box, Text, VStack } from "@chakra-ui/layout";
 import { Button } from "@chakra-ui/react";
 
 import { Term } from "./Term";
-import CurrentGradesField from "./CurrentGradesField";
+// import CurrentGradesField from "./CurrentGradesField";
 import { useTerms } from "../hooks/useTerms";
 import { useGpa } from "../hooks/useGpa";
 
 export function TermsContainer() {
-  const [currentGpa, setCurrentGpa] = useState(null);
-  const [currentHours, setCurrentHours] = useState(null);
+  // const [currentGpa, setCurrentGpa] = useState(null);
+  // const [currentHours, setCurrentHours] = useState(null);
   const {
     terms,
     allCourses,
@@ -22,9 +22,9 @@ export function TermsContainer() {
     handleCourseChange,
   } = useTerms();
   const { gpa: cumulativeGpa, totalHours } = useGpa(
-    allCourses,
-    currentGpa,
-    currentHours
+    allCourses
+    // currentGpa,
+    // currentHours
   );
 
   return (
