@@ -4,8 +4,8 @@ import { Box, Flex } from "@chakra-ui/layout";
 
 import theme from "./theme";
 import Header from "./components/Header";
-import CalcContainer from "./components/CalcContainer";
 import Footer from "./components/Footer";
+import { TermsContainer } from "./components/TermsContainer";
 
 function App({ Component }) {
   return (
@@ -14,7 +14,7 @@ function App({ Component }) {
         <Flex minH="100vh" flexDir="column" justifyContent="space-between">
           <Box>
             <Header />
-            <CalcContainer />
+            <TermsContainer />
           </Box>
           <Footer />
         </Flex>

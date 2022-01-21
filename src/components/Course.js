@@ -1,7 +1,7 @@
 import React from "react";
 import { Select, Flex, Input, Button } from "@chakra-ui/react";
 
-class GradeField extends React.Component {
+export default class Course extends React.Component {
   constructor(props) {
     super(props);
 
@@ -67,7 +67,7 @@ class GradeField extends React.Component {
           size="sx"
           bgColor="tomato"
           color="white"
-          onClick={this.handleClickDelete}
+          onClick={() => this.props.deleteCourse(this.props.id)}
         >
           X
         </Button>
@@ -75,5 +75,3 @@ class GradeField extends React.Component {
     );
   }
 }
-
-export default GradeField;
