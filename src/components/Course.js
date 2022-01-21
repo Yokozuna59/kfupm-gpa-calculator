@@ -9,7 +9,7 @@ export function Course({ id, handleInputChange, onDeleteCourse }) {
       <Input placeholder="Course" width="30%" my="2" mx="2"></Input>
       <Select
         name="grade"
-        onChange={handleInputChange}
+        onChange={(e) => handleInputChange(e, id)}
         placeholder="Grade"
         w="30%"
         my="2"
@@ -24,7 +24,7 @@ export function Course({ id, handleInputChange, onDeleteCourse }) {
 
       <Select
         name="hours"
-        onChange={handleInputChange}
+        onChange={(e) => handleInputChange(e, id)}
         placeholder="Credits"
         w="30%"
         my="2"
