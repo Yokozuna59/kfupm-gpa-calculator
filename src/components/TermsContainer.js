@@ -29,10 +29,10 @@ export function TermsContainer() {
 
   return (
     <Box my="6" maxW="960px" mx="auto">
-      <CurrentGradesField
+      {/* <CurrentGradesField
         onGpaChange={(e) => setCurrentGpa(e.target.value)}
         onHoursChange={(e) => setCurrentHours(e.target.value)}
-      />
+      /> */}
       {terms.map((term, index) => (
         // TODO: Use context to avoid prop drilling
         <Term
