@@ -1,9 +1,10 @@
-import React from "react";
-import { Box, Text, Center, VStack } from "@chakra-ui/layout";
-import { Button, Heading, HStack } from "@chakra-ui/react";
+import React, { useState } from "react";
+import { Box, Text, Center, VStack, Flex } from "@chakra-ui/layout";
+import { Button, Heading, HStack, Input } from "@chakra-ui/react";
 
 import { Course } from "./Course";
 import { useGpa } from "../hooks/useGpa";
+import { EditIcon } from "@chakra-ui/icons";
 
 export function Term({
   id,
@@ -15,6 +16,10 @@ export function Term({
   onDeleteCourse,
 }) {
   const { gpa, totalHours } = useGpa(courses);
+  const [isEditingTitle, setIsEditingTitle] = useState(false);
+  const [termTitle, setTermTitle] = useState(title);
+
+  const toggleTitleField = () => setIsEditingTitle(!isEditingTitle);
 
   // TODO: This really needs refactoring
   const handleInputChange = (event, id) => {
@@ -37,9 +42,29 @@ export function Term({
 
   return (
     <Box border="1px solid #333" py="9" my="6" maxW="960px" mx="auto">
-      <Heading mb="8" textAlign="center">
-        {title}
-      </Heading>
+      <Center>
+        {isEditingTitle ? (
+          <Input
+            textAlign="center"
+            w={"md"}
+            value={termTitle}
+            onBlur={toggleTitleField}
+            onChange={(e) => setTermTitle(e.target.value)}
+            autoFocus
+          />
+        ) : (
+          <Flex justify={"center"} align={"center"}>
+            <Heading mx={2}>{termTitle}</Heading>
+            <EditIcon
+              w={25}
+              h={25}
+              _hover={{ color: "#a1a1a1" }}
+              onClick={toggleTitleField}
+            />
+          </Flex>
+        )}
+      </Center>
+
       {courses.map((field) => (
         <Course
           grade={field.grade}
