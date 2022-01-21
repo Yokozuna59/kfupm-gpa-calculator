@@ -5,7 +5,7 @@ import { Box, Text, VStack } from "@chakra-ui/layout";
 import { nanoid } from "nanoid";
 import { Button } from "@chakra-ui/react";
 
-import Term from "./Term";
+import { Term } from "./Term";
 import CurrentGradesField from "./CurrentGradesField";
 import { useTerms } from "../hooks/useTerms";
 
@@ -33,10 +33,10 @@ export function TermsContainer() {
           key={term.id}
           id={term.id}
           courses={term.courses}
-          deleteTerm={deleteTerm}
-          addCourse={addCourse}
-          deleteCourse={deleteCourse}
-          handleCourseChange={(courseId, course) =>
+          onDeleteTerm={deleteTerm}
+          onAddCourse={addCourse}
+          onDeleteCourse={deleteCourse}
+          onCourseChange={(courseId, course) =>
             handleCourseChange(term.id, courseId, course)
           }
         />
