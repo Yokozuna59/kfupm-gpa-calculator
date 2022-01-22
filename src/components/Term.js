@@ -50,6 +50,9 @@ export function Term({
             value={termTitle}
             onBlur={toggleTitleField}
             onChange={(e) => setTermTitle(e.target.value)}
+            onKeyPress={(e) => {
+              if (e.key === "Enter") toggleTitleField();
+            }}
             autoFocus
           />
         ) : (
