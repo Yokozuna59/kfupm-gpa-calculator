@@ -4,7 +4,7 @@ import { Button, Heading, HStack, Input } from "@chakra-ui/react";
 
 import { Course } from "./Course";
 import { useGpa } from "../hooks/useGpa";
-import { EditIcon } from "@chakra-ui/icons";
+import { AddIcon, EditIcon, DeleteIcon } from "@chakra-ui/icons";
 
 export function Term({
   id,
@@ -41,7 +41,14 @@ export function Term({
   };
 
   return (
-    <Box border="1px solid #333" py="9" my="6" maxW="960px" mx="auto">
+    <Box
+      maxW="960px"
+      mx="auto"
+      py="9"
+      my="6"
+      backgroundColor={"#2c323d"}
+      rounded={"md"}
+    >
       <Center>
         {isEditingTitle ? (
           <Input
@@ -50,6 +57,9 @@ export function Term({
             value={termTitle}
             onBlur={toggleTitleField}
             onChange={(e) => setTermTitle(e.target.value)}
+            onKeyPress={(e) => {
+              if (e.key === "Enter") toggleTitleField();
+            }}
             autoFocus
           />
         ) : (
@@ -85,8 +95,15 @@ export function Term({
           </Box>
           <Text fontSize="20">Term hours: {totalHours}</Text>
           <HStack>
-            <Button onClick={() => onAddCourse(id)}>Add Course</Button>
-            <Button bgColor="tomato" onClick={() => onDeleteTerm(id)}>
+            <Button rightIcon={<AddIcon />} onClick={() => onAddCourse(id)}>
+              Add Course
+            </Button>
+
+            <Button
+              bgColor="tomato"
+              rightIcon={<DeleteIcon />}
+              onClick={() => onDeleteTerm(id)}
+            >
               Delete Term
             </Button>
           </HStack>

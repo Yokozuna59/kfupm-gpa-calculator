@@ -1,17 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { Box, Text, VStack } from "@chakra-ui/layout";
 
 import { Button } from "@chakra-ui/react";
 
 import { Term } from "./Term";
-// import CurrentGradesField from "./CurrentGradesField";
+import CurrentGradesField from "./CurrentGradesField";
 import { useTerms } from "../hooks/useTerms";
 import { useGpa } from "../hooks/useGpa";
+import { AddIcon } from "@chakra-ui/icons";
 
 export function TermsContainer() {
-  // const [currentGpa, setCurrentGpa] = useState(null);
-  // const [currentHours, setCurrentHours] = useState(null);
+  const [currentGpa, setCurrentGpa] = useState(null);
+  const [currentHours, setCurrentHours] = useState(null);
   const {
     terms,
     allCourses,
@@ -22,17 +23,17 @@ export function TermsContainer() {
     handleCourseChange,
   } = useTerms();
   const { gpa: cumulativeGpa, totalHours } = useGpa(
-    allCourses
-    // currentGpa,
-    // currentHours
+    allCourses,
+    currentGpa,
+    currentHours
   );
 
   return (
     <Box my="6" maxW="960px" mx="auto">
-      {/* <CurrentGradesField
-        onGpaChange={(e) => setCurrentGpa(e.target.value)}
-        onHoursChange={(e) => setCurrentHours(e.target.value)}
-      /> */}
+      <CurrentGradesField
+        onGpaChange={setCurrentGpa}
+        onHoursChange={setCurrentHours}
+      />
       {terms.map((term, index) => (
         // TODO: Use context to avoid prop drilling
         <Term
@@ -48,12 +49,19 @@ export function TermsContainer() {
           }
         />
       ))}
-      <VStack shouldWrapChildren="true" border="1px solid #333" py="3">
+      <VStack
+        py="3"
+        shouldWrapChildren="true"
+        rounded={"md"}
+        backgroundColor={"#2c323d"}
+      >
         <Text fontSize="25" textAlign="center">
           Cumulative GPA: {cumulativeGpa >= 0 ? " " + cumulativeGpa : ""}
         </Text>
         <Text fontSize="20">Total hours: {totalHours}</Text>
-        <Button onClick={() => addTerm()}>Add Term</Button>
+        <Button rightIcon={<AddIcon />} onClick={() => addTerm()}>
+          Add Term
+        </Button>
       </VStack>
     </Box>
   );
