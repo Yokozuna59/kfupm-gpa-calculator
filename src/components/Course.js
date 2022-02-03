@@ -1,5 +1,6 @@
 import React from "react";
 import { Select, Flex, Input, Button } from "@chakra-ui/react";
+import { DeleteIcon } from "@chakra-ui/icons";
 
 const letterGrades = ["A+", "A", "B+", "B", "C+", "C", "D+", "D", "F"];
 
@@ -45,7 +46,7 @@ export function Course({ id, handleInputChange, onDeleteCourse }) {
         color="white"
         onClick={() => onDeleteCourse(id)}
       >
-        X
+        <DeleteIcon />
       </Button>
     </Flex>
   );

@@ -8,6 +8,7 @@ import { Term } from "./Term";
 import CurrentGradesField from "./CurrentGradesField";
 import { useTerms } from "../hooks/useTerms";
 import { useGpa } from "../hooks/useGpa";
+import { AddIcon } from "@chakra-ui/icons";
 
 export function TermsContainer() {
   const [currentGpa, setCurrentGpa] = useState(null);
@@ -48,12 +49,19 @@ export function TermsContainer() {
           }
         />
       ))}
-      <VStack shouldWrapChildren="true" border="1px solid #333" py="3">
+      <VStack
+        py="3"
+        shouldWrapChildren="true"
+        rounded={"md"}
+        backgroundColor={"#2c323d"}
+      >
         <Text fontSize="25" textAlign="center">
           Cumulative GPA: {cumulativeGpa >= 0 ? " " + cumulativeGpa : ""}
         </Text>
         <Text fontSize="20">Total hours: {totalHours}</Text>
-        <Button onClick={() => addTerm()}>Add Term</Button>
+        <Button rightIcon={<AddIcon />} onClick={() => addTerm()}>
+          Add Term
+        </Button>
       </VStack>
     </Box>
   );
