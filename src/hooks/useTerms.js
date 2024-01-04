@@ -1,7 +1,7 @@
 import { nanoid } from "nanoid";
 import { useState, useEffect } from "react";
 
-const emptyCourse = { grade: "", hours: null, id: nanoid(4) }
+const emptyCourse = () => ({ grade: "", hours: null, id: nanoid(4) })
 
 // TODO: This should be split into two hooks
 export function useTerms() {
@@ -9,7 +9,7 @@ export function useTerms() {
     const savedTerms = localStorage.getItem('terms');
     return savedTerms ? JSON.parse(savedTerms) : [{
       id: nanoid(4),
-      courses: [emptyCourse],
+      courses: [emptyCourse()],
     }];
   });
   const allCourses = terms.map((term) => term.courses).flat();
@@ -23,7 +23,7 @@ export function useTerms() {
       ...terms,
       {
         id: nanoid(4),
-        courses: [emptyCourse],
+        courses: [emptyCourse()],
       },
     ]);
   };
@@ -44,7 +44,7 @@ export function useTerms() {
       id: targetTerm.id,
       courses: [
         ...targetTerm.courses,
-        emptyCourse,
+        emptyCourse(),
       ],
     };
 
