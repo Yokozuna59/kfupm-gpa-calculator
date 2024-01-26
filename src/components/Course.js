@@ -7,7 +7,14 @@ const letterGrades = ["A+", "A", "B+", "B", "C+", "C", "D+", "D", "F"];
 export function Course({ id, handleInputChange, onDeleteCourse }) {
   return (
     <Flex mx="4" my="4">
-      <Input placeholder="Course" width="30%" my="2" mx="2"></Input>
+      <Input
+        placeholder="Course"
+        onChange={(e) => handleInputChange(e, id)}
+        width="30%"
+        my="2"
+        mx="2"
+      ></Input>
+
       <Select
         name="grade"
         onChange={(e) => handleInputChange(e, id)}

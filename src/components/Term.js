@@ -77,6 +77,7 @@ export function Term({
 
       {courses.map((field) => (
         <Course
+          name={field.name}
           grade={field.grade}
           hours={field.hours}
           key={field.id}

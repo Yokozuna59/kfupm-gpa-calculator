@@ -1,7 +1,7 @@
 import { nanoid } from "nanoid";
 import { useState, useEffect } from "react";
 
-const emptyCourse = () => ({ grade: "", hours: null, id: nanoid(4) })
+const emptyCourse = () => ({ name: "", grade: "", hours: null, id: nanoid(4) })
 
 // TODO: This should be split into two hooks
 export function useTerms() {
