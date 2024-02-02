@@ -1,22 +1,29 @@
 import { nanoid } from "nanoid";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+
+const emptyCourse = () => ({ name: "", grade: "", hours: null, id: nanoid(4) })
 
 // TODO: This should be split into two hooks
 export function useTerms() {
-  const [terms, setTerms] = useState([
-    {
+  const [terms, setTerms] = useState(() => {
+    const savedTerms = localStorage.getItem('terms');
+    return savedTerms ? JSON.parse(savedTerms) : [{
       id: nanoid(4),
-      courses: [{ grade: "", hours: null, id: nanoid(4) }],
-    },
-  ]);
+      courses: [emptyCourse()],
+    }];
+  });
   const allCourses = terms.map((term) => term.courses).flat();
+
+  useEffect(() => {
+    localStorage.setItem('terms', JSON.stringify(terms));
+  }, [terms]);
 
   const addTerm = () => {
     setTerms([
       ...terms,
       {
         id: nanoid(4),
-        courses: [{ grade: "", hours: null, id: nanoid(4) }],
+        courses: [emptyCourse()],
       },
     ]);
   };
@@ -37,7 +44,7 @@ export function useTerms() {
       id: targetTerm.id,
       courses: [
         ...targetTerm.courses,
-        { grade: "", hours: null, id: nanoid(4) },
+        emptyCourse(),
       ],
     };
 

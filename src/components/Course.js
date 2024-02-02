@@ -4,10 +4,19 @@ import { DeleteIcon } from "@chakra-ui/icons";
 
 const letterGrades = ["A+", "A", "B+", "B", "C+", "C", "D+", "D", "F"];
 
-export function Course({ id, handleInputChange, onDeleteCourse }) {
+export function Course({ id, handleInputChange, onDeleteCourse, name, grade, hours }) {
   return (
     <Flex mx="4" my="4">
-      <Input placeholder="Course" width="30%" my="2" mx="2"></Input>
+      <Input
+        name="name"
+        placeholder="Course"
+        onChange={(e) => handleInputChange(e, id)}
+        width="30%"
+        my="2"
+        mx="2"
+        value={name}
+      ></Input>
+
       <Select
         name="grade"
         onChange={(e) => handleInputChange(e, id)}
@@ -15,6 +24,7 @@ export function Course({ id, handleInputChange, onDeleteCourse }) {
         w="30%"
         my="2"
         mx="2"
+        value={grade}
       >
         {letterGrades.map((grade) => (
           <option key={grade} value={grade}>
@@ -29,6 +39,7 @@ export function Course({ id, handleInputChange, onDeleteCourse }) {
         placeholder="Credits"
         w="30%"
         my="2"
+        value={hours}
       >
         {[...Array(10).keys()].map((i) => (
           <option key={i} value={i}>
